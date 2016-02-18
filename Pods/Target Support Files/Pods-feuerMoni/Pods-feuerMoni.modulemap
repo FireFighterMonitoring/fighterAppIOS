@@ -1,0 +1,6 @@
+framework module Pods_feuerMoni {
+  umbrella header "Pods-feuerMoni-umbrella.h"
+
+  export *
+  module * { export * }
+}
