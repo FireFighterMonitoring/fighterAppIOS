@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  feuerMoni
 //
-//  Created by Sebastian Stallenberger on 18.02.16.
 //  Copyright © 2016 jambit. All rights reserved.
 //
 
@@ -38,19 +37,25 @@ class ViewController: UIViewController, WCSessionDelegate, BackendManagerDelegat
                 dispatch_async(dispatch_get_main_queue()) {
                     self.appendLog("Start monitoring")
                 }
-                backendManager?.activate()
+                backendManager?.activate({ success in
+                    replyHandler(["status": success ? "success" : "error"])
+                })
             case "STOP":
                 dispatch_async(dispatch_get_main_queue()) {
                     self.appendLog("Stop monitoring")
                 }
-                backendManager?.deactivate()
+                backendManager?.deactivate({ success in
+                    replyHandler(["status": success ? "success" : "error"])
+                })
             case "UPDATE":
                 if let heartRateString = message["heartrate"] as? String {
                     if let heartRate = Double(heartRateString) {
                         dispatch_async(dispatch_get_main_queue()) {
                             self.appendLog("Update with heartrate: \(heartRate)")
                         }
-                        backendManager?.update(VitalDataType.Heartrate, value: heartRate)
+                        backendManager?.update(VitalDataType.Heartrate, value: heartRate, completion: { success in
+                            replyHandler(["status": success ? "success" : "error"])
+                        })
                     }
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
@@ -61,10 +66,9 @@ class ViewController: UIViewController, WCSessionDelegate, BackendManagerDelegat
             default:
                 dispatch_async(dispatch_get_main_queue()) {
                     self.appendLog("Unknown command: \(command)")
+                    replyHandler(["status": "error"])
                 }
             }
-
-            replyHandler(["status": "success"])
         } else {
             dispatch_async(dispatch_get_main_queue()) {
                 self.appendLog("Error!")

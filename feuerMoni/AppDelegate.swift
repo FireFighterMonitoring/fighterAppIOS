@@ -2,7 +2,6 @@
 //  AppDelegate.swift
 //  feuerMoni
 //
-//  Created by Sebastian Stallenberger on 18.02.16.
 //  Copyright © 2016 jambit. All rights reserved.
 //
 

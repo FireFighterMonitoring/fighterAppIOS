@@ -2,7 +2,6 @@
 //  InterfaceController.swift
 //  feuerMoni WatchKit Extension
 //
-//  Created by Sebastian Stallenberger on 18.02.16.
 //  Copyright © 2016 jambit. All rights reserved.
 //
 
@@ -34,9 +33,20 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
         healthStore.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { (success, error) -> Void in
             print("[Watch] Authorization okay")
         }
+    }
 
-        startButton.setEnabled(true)
-        stopButton.setEnabled(false)
+    func setButtonsStateActive(active: Bool) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.startButton.setEnabled(active)
+            self.stopButton.setEnabled(!active)
+        }
+    }
+
+    func setBothButtonsInactive() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.startButton.setEnabled(false)
+            self.stopButton.setEnabled(false)
+        }
     }
 
     override func didDeactivate() {
@@ -45,6 +55,8 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
     }
 
     func sendStart() {
+        setBothButtonsInactive()
+
         let session = WCSession.defaultSession()
         let startPayload = ["command": "START"]
 
@@ -56,22 +68,26 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
 
                 switch status {
                 case "success":
+                    print("Start successful")
                     self.workoutSession = HKWorkoutSession(activityType: HKWorkoutActivityType.Running, locationType: HKWorkoutSessionLocationType.Outdoor)
                     self.workoutSession?.delegate = self
 
                     self.healthStore.startWorkoutSession(self.workoutSession!)
+                    return
                 default:
                     print("Error during start.")
-                    self.startButton.setEnabled(true)
-                    self.stopButton.setEnabled(false)
+                    self.setButtonsStateActive(false)
                 }
             }
         }) { (error) -> Void in
             print("[Watch] Send failed! error: \(error)")
+            self.setButtonsStateActive(false)
         }
     }
 
     func sendStop() {
+        setBothButtonsInactive()
+
         let session = WCSession.defaultSession()
         let stopPayload = ["command": "STOP"]
 
@@ -83,15 +99,16 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
 
                 switch status {
                 case "success":
+                    print("Stop successful")
                     self.healthStore.endWorkoutSession(self.workoutSession!)
                 default:
-                    print("Error during start.")
-                    self.startButton.setEnabled(false)
-                    self.stopButton.setEnabled(true)
+                    print("Error during stop.")
+                    self.setButtonsStateActive(true)
                 }
             }
         }) { (error) -> Void in
             print("[Watch] Send failed! error: \(error)")
+            self.setButtonsStateActive(true)
         }
     }
 
@@ -111,14 +128,10 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
     }
 
     @IBAction func startButtonPressed() {
-        startButton.setEnabled(false)
-
         sendStart()
     }
 
     @IBAction func stopButtonPressed() {
-        stopButton.setEnabled(false)
-
         sendStop()
     }
 
@@ -128,10 +141,8 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
         switch toState {
         case .Running:
             self.workoutDidStart(date)
-            stopButton.setEnabled(true)
         case .Ended:
             self.workoutDidEnd(date)
-            startButton.setEnabled(true)
         default:
             print("[Watch] workout: unknown state")
         }
@@ -166,12 +177,11 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
 
     func workoutSession(workoutSession: HKWorkoutSession, didFailWithError error: NSError) {
         print("[Watch] session couldn't be started. Error:\(error)")
-        startButton.setEnabled(true)
-        stopButton.setEnabled(false)
     }
 
     private func workoutDidStart(date: NSDate) {
         print("[Watch] workout did start")
+        self.setButtonsStateActive(true)
 
         let query = self.createStreamingHeartRateQuery(date)
         self.healthStore.executeQuery(query)
@@ -179,5 +189,6 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate {
 
     private func workoutDidEnd(date: NSDate) {
         print("[Watch] workout did end")
+        self.setButtonsStateActive(false)
     }
 }
