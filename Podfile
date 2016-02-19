@@ -5,6 +5,7 @@ use_frameworks!
 target 'feuerMoni' do
     pod 'Alamofire', '~> 3.0'
     pod 'SwiftyJSON'
+    pod 'CocoaLumberjack/Swift'
 end
 
 target 'feuerMoni WatchKit App' do

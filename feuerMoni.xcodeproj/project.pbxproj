@@ -20,6 +20,9 @@
 		D32711121C7604DD0068AD22 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32711111C7604DD0068AD22 /* InterfaceController.swift */; };
 		D32711141C7604DD0068AD22 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32711131C7604DD0068AD22 /* ExtensionDelegate.swift */; };
 		D32711161C7604DD0068AD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D32711151C7604DD0068AD22 /* Assets.xcassets */; };
+		D3318D7F1C767EF000C3368D /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3318D7E1C767EF000C3368D /* HealthKit.framework */; };
+		D3318D821C76F21600C3368D /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3318D811C76F21600C3368D /* HealthKit.framework */; };
+		D3318D851C7705F700C3368D /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3318D841C7705F700C3368D /* BackendManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,11 @@
 		D32711131C7604DD0068AD22 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		D32711151C7604DD0068AD22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D32711171C7604DD0068AD22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3318D7E1C767EF000C3368D /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		D3318D801C767EF000C3368D /* feuerMoni.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = feuerMoni.entitlements; sourceTree = "<group>"; };
+		D3318D811C76F21600C3368D /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		D3318D831C76F21600C3368D /* feuerMoni WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "feuerMoni WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		D3318D841C7705F700C3368D /* BackendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1997DD1A546460D26606B99F /* Pods_feuerMoni.framework in Frameworks */,
+				D3318D7F1C767EF000C3368D /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3318D821C76F21600C3368D /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +118,8 @@
 		03F79E28F56AF4FB558434F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3318D811C76F21600C3368D /* HealthKit.framework */,
+				D3318D7E1C767EF000C3368D /* HealthKit.framework */,
 				517AB143C2B48AA520B51232 /* Pods_feuerMoni.framework */,
 			);
 			name = Frameworks;
@@ -147,12 +159,14 @@
 		D32710ED1C7604DD0068AD22 /* feuerMoni */ = {
 			isa = PBXGroup;
 			children = (
+				D3318D801C767EF000C3368D /* feuerMoni.entitlements */,
 				D32710EE1C7604DD0068AD22 /* AppDelegate.swift */,
 				D32710F01C7604DD0068AD22 /* ViewController.swift */,
 				D32710F21C7604DD0068AD22 /* Main.storyboard */,
 				D32710F51C7604DD0068AD22 /* Assets.xcassets */,
 				D32710F71C7604DD0068AD22 /* LaunchScreen.storyboard */,
 				D32710FA1C7604DD0068AD22 /* Info.plist */,
+				D3318D841C7705F700C3368D /* BackendManager.swift */,
 			);
 			path = feuerMoni;
 			sourceTree = "<group>";
@@ -170,6 +184,7 @@
 		D32711101C7604DD0068AD22 /* feuerMoni WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D3318D831C76F21600C3368D /* feuerMoni WatchKit Extension.entitlements */,
 				D32711111C7604DD0068AD22 /* InterfaceController.swift */,
 				D32711131C7604DD0068AD22 /* ExtensionDelegate.swift */,
 				D32711151C7604DD0068AD22 /* Assets.xcassets */,
@@ -249,12 +264,24 @@
 				TargetAttributes = {
 					D32710EA1C7604DD0068AD22 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = QSTQ85MZQ5;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					D32710FC1C7604DD0068AD22 = {
 						CreatedOnToolsVersion = 7.2;
 					};
 					D327110B1C7604DD0068AD22 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = QSTQ85MZQ5;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -361,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3318D851C7705F700C3368D /* BackendManager.swift in Sources */,
 				D32710F11C7604DD0068AD22 /* ViewController.swift in Sources */,
 				D32710EF1C7604DD0068AD22 /* AppDelegate.swift in Sources */,
 			);
@@ -502,10 +530,14 @@
 		D327111B1C7604DD0068AD22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "feuerMoni WatchKit Extension/feuerMoni WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "feuerMoni WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -516,10 +548,14 @@
 		D327111C1C7604DD0068AD22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "feuerMoni WatchKit Extension/feuerMoni WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "feuerMoni WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -564,11 +600,15 @@
 			baseConfigurationReference = A3551721960A6122F071F90F /* Pods-feuerMoni.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = feuerMoni/feuerMoni.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = feuerMoni/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -577,11 +617,15 @@
 			baseConfigurationReference = 6B2E55100F08AC7ACA18305E /* Pods-feuerMoni.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = feuerMoni/feuerMoni.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = feuerMoni/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
