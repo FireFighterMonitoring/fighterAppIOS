@@ -273,6 +273,7 @@
 					};
 					D32710FC1C7604DD0068AD22 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = QSTQ85MZQ5;
 					};
 					D327110B1C7604DD0068AD22 = {
 						CreatedOnToolsVersion = 7.2;
@@ -567,11 +568,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = feuerMoni_WatchKit_Extension;
 				INFOPLIST_FILE = "feuerMoni WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -583,11 +587,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = feuerMoni_WatchKit_Extension;
 				INFOPLIST_FILE = "feuerMoni WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jambit.feuerMoni.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;

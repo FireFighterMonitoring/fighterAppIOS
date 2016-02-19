@@ -19,7 +19,7 @@ enum VitalDataType {
 
 class BackendManager {
 
-    let baseUrl = "http://192.168.234.222:8080/api/v1"
+    let baseUrl = "http://192.168.232.112:8080/api/v1"
 
     let delegate: BackendManagerDelegate
 
